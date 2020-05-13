@@ -1,0 +1,259 @@
+body{
+    overflow-x: hidden;
+}
+
+main{
+    width: 100%;
+    height: calc(100vh - 60px);
+    overflow-y: scroll;
+    padding: 20px 10px 20px 10px;
+}
+
+#listadoProductos h2{
+    font-weight: 900;
+}
+
+#listadoProductos ul{
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    grid-gap: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#listadoProductos ul li{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 0.3fr;
+    background-color: white;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 5px 5px 5px 5px;
+}
+
+#listadoProductos ul li img{
+    width: 98%;
+    margin-left: auto;
+    margin-top: 5px;
+    margin-right: auto;
+}
+
+.contenedorPrincipal{
+    display: grid;
+    grid-template-rows: 1fr 3fr 50px;
+    grid-template-columns: 1fr;
+    padding: 10px 10px 10px 10px;
+    grid-gap: 10px;
+}
+
+.contenedorPrincipal h3{
+    font-weight: 700;
+    font-size: 1.5em;
+}
+
+
+.contenedorSecundario{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+
+}
+
+.contenedorSecundario p{
+    font-size: 1.5em;
+}
+
+.contenedorSecundario span{
+    display: flex;
+    justify-self: right;
+    align-self: center;
+    width: 30px;
+    height: 30px;
+    font-size: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.isFavorite{
+    background-image: url('../img/corazonPintado.png');
+}
+
+.isNotFavorite{
+    background-image: url('../img/corazon.png');
+}
+
+.noFav{
+    margin-top: 50px;
+}
+
+.promocion{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows:1fr 1fr;
+}
+
+.noPromocion{
+    padding-top: 10px;
+}
+
+
+.promocion p:first-of-type{
+    font-size: 1.5em;
+}
+
+.promocion p:last-of-type{
+    font-size: 1em;
+    text-decoration: line-through;
+}
+
+.modalNotificacion{
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 95%;
+    height: 40px;
+    text-align: center;
+    padding-top: 10px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+
+.notificacionCerrar{
+    position: absolute;
+    display: block;
+    width: 25px;
+    height: 20px;
+    top: 7px;
+    right: 10px;
+    font-size: 0;
+    padding-top: 10px;
+}
+
+.notificacionCerrar span{
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: black;
+    border: 1px solid black;
+    border-radius: 50px;
+}
+
+.notificacionVerde{
+    background-color: #6abf54;
+    color: black;
+}
+
+.cerrarVerde span{
+    background-color: black;
+}
+
+.notificacionRoja{
+    background-color: #cb3333;
+    color: white;
+}
+
+.cerrarRojo span{
+    background-color: white;
+    border: 1px solid white;
+}
+
+.banner{
+    width: 90%;
+    height: 200px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (min-width:600px){
+
+    #listadoProductos ul{
+    grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+@media(min-width: 900px){
+
+    .modalNotificacion{
+        top: 120px;
+        width:50%;
+    }
+
+    h2{
+        margin-top: 50px;
+    }
+
+    #listadoProductos{
+        padding-left: 15px;
+    }
+
+    #listadoProductos ul li{
+        grid-template-columns: 1fr 1.5fr;
+        grid-template-rows: 1fr;
+    }
+    
+    #listadoProductos ul li img{
+        width: 80%;
+        margin-left: 0;
+        margin-top: 0;
+
+    }
+
+    .contenedorPrincipal{
+        grid-template-rows: 1fr 3fr 30px;
+    }
+
+    .contenedorSecundario{
+        height: 30px;
+        align-self: flex-end;
+    }
+
+    .contenedorSecundario p{
+        display: flex;
+        justify-self: flex-start;
+        align-self: flex-end;
+    }
+    
+    .contenedorSecundario span{
+        display: flex;
+        align-self: flex-end;
+    }
+
+    .noPromocion{
+        display: flex;
+        align-self: flex-end;
+    }
+
+    .promocion{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows:1fr;
+    }
+    .promocion p:first-of-type{
+        font-size: 1.5em;
+        display: flex;
+        align-self: center;
+    }
+    
+    .promocion p:last-of-type{
+        display: flex;
+        align-self: center;
+        font-size: 1em;
+        text-decoration: line-through;
+        margin-left: 10px;
+    }
+
+    .banner{
+        margin-top: 60px;
+        width: 50%;
+        height: 250px;
+    }
+}

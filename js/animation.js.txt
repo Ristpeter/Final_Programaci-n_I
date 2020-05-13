@@ -1,0 +1,87 @@
+const _c = console.log, d = document;
+
+/* Animación del menú */
+
+const header = d.querySelector('header'), menuBtn = d.querySelector('header label:first-of-type'), menu = d.querySelector('header nav'), body = d.querySelector('body'), categoriaBtn = d.querySelector('.ulPrincipal li:nth-of-type(3)'), ulSecundario = d.querySelector('.ulSecundario'), ulPrincipal = d.querySelector('.ulPrincipal');
+
+menuBtn.addEventListener('click', displayMenu);
+categoriaBtn.addEventListener('click', displayCategoriaMenu);
+window.addEventListener('resize', ajustarMenu);
+window.addEventListener('load', ajustarMenu);
+
+function displayMenu() {
+
+    if(body.clientWidth < 900){
+
+        if(menu.getBoundingClientRect().left < -1){
+            menu.style.transform = 'translateX(0%)';
+            menu.style.transition = '0.5s';
+            body.style.overflowY = 'hidden';
+        }else{
+            menu.style.transform = 'translateX(-100%)';
+            menu.style.transition = '0.5s';
+            body.style.overflowY = 'scroll';
+    
+        }
+
+    }
+
+
+}
+
+function displayCategoriaMenu() {
+
+    if(body.clientWidth < 900){
+
+        if(ulSecundario.getBoundingClientRect().left < -1){
+            ulSecundario.style.transform = 'translateX(0%)';
+            ulSecundario.style.transition = '0.5s';
+            ulPrincipal.style.gridTemplateRows = '40px 40px 200px 40px 40px';
+        }else{
+            ulSecundario.style.transform = 'translateX(-100%)';
+            ulSecundario.style.transition = '0.5s';
+            setTimeout(() => {
+                ulPrincipal.style.gridTemplateRows = '40px 40px 40px 40px';
+            }, 500);
+        }
+
+    }else{
+        if(ulSecundario.getBoundingClientRect().top < -1){
+            ulSecundario.style.transform = 'translateY(0%)';
+
+        }else{
+            ulSecundario.style.transform = 'translateY(-200%)';
+
+        }
+    }
+
+}
+
+function ajustarMenu() {
+    menu.style.left=header.offsetLeft + 'px';
+}
+
+
+function ajustarCarrito() {
+    
+    let carrito = d.getElementById('carritoModal')
+
+    if(carrito){
+        carrito.style.right=header.offsetLeft + 'px';
+    }
+}
+
+window.addEventListener('resize', ajustarCheckOut);
+window.addEventListener('load', ajustarCheckOut);
+
+function ajustarCheckOut() {
+    
+    let checkOut = d.getElementById('modalCheckOut');
+
+    if(checkOut){
+        checkOut.style.left=header.offsetLeft + 'px';
+    }
+}
+
+
+

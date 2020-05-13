@@ -1,0 +1,1548 @@
+const main = d.querySelector('main'), listadoProductos = d.querySelector('#listadoProductos');
+
+var totalCont = 0;
+
+var aBanners = [
+    {
+        id:0,
+        nombre: 'Banner de oferta Casio G-Shock',
+        img: './img/banner-GShock.png'
+    },
+    {
+        id: 1,
+        nombre: 'Banner del lanzamiento Xiaomi Infinity',
+        img: './img/banner-Infinity.png'
+    }
+];
+
+const aProductos = [
+
+    {
+        id: 0,
+        nombre:'Casio Dorado',
+        descripcion: 'Clasico reloj digital Casio bañado en oro, hebilla ajustable, correa de acero inoxidable, cristal de resina, y resistente al agua hasta 5mts',
+        precio: 84999,
+        img:'./img/relojes/Casio_Dorado.png',
+        categoria: 'Elegante',
+        promocion: false,
+        favorito: false
+    },
+    {
+        id: 1,
+        nombre:'Casio G-Shock',
+        descripcion: 'Casio G-Shock es ideal para deportistas, cuenta con detector de ritmo cardiaco, cuenta pasos, cuenta distancia, sumergible hasta 30mts',
+        precio: 15000,
+        img:'./img/relojes/Casio_GShock.png',
+        categoria: 'Todoterreno',
+        promocion: true,
+        promocionP:12999,
+        favorito: false
+    },
+    {
+        id: 2,
+        nombre:'Hugo Boss K-55',
+        descripcion: 'Fino reloj negro, ajustable en 6 diferentes posiciones, con cinta de cuero cintetico de altisimo confort y vidrio de zaphiro azulado',
+        precio: 32500,
+        img:'./img/relojes/hugoBoss-K55.png',
+        categoria: 'Elegante',
+        promocion: false,
+        favorito: false
+    },
+    {
+        id: 3,
+        nombre:'Hugo Boss Meuro',
+        descripcion: 'Hugo Boss presenta el Meuro dentro de su linea economica, fino y practico para salidas, gran tacto y adaptabilidad cuenta con 5 posiciones',
+        precio: 12999,
+        img:'./img/relojes/hugoBoss-Meuro.png',
+        categoria: 'Elegante',
+        promocion: false,
+        favorito: false
+    },
+    {
+        id: 4,
+        nombre:'Rolex One',
+        descripcion: 'Rolex One es un reloj delicado y sutil, presenta mas de 5 posiciones, una tira hecha de piel sintetica, y una incrustacion de perlitas sobre su vidrio',
+        precio: 34999,
+        img:'./img/relojes/Rolex-One.png',
+        categoria: 'Elegante',
+        promocion: false,
+        favorito: false
+    },
+    {
+        id: 5,
+        nombre:'Rolex EME',
+        descripcion: 'El Rolex EME presenta su cinta para el ajuste bañana en diamantin rosado, aparte de un fondo de porcelanato blanco y agujas bañadas en oro',
+        precio: 69999,
+        img:'./img/relojes/Rolex-EME.png',
+        categoria: 'Elegante',
+        promocion: true,
+        promocionP:59999,
+        favorito: false
+    },
+    {
+        id: 6,
+        nombre:'Rolex Ireland',
+        descripcion: 'Su borde esta bañado en oro verde, el Ireland cuenta con una estructura hecha en carbono y recubierta en plata. Es sumergible hasta 15mts y tiene las agujas bañas en porcelanato',
+        precio: 99999,
+        img:'./img/relojes/Rolex-Ireland.png',
+        categoria: 'Elegante',
+        promocion: false,
+        favorito: false
+    },
+    {
+        id: 7,
+        nombre:'AppleWatch Series 5',
+        descripcion: 'AppleWatch presenta su Series 5, trae consigo conexion directa a 4G, camara de 12px, accesibilidad a las aplicaciones que un telefono corriente podria tener y bateria de mas de 10 horas',
+        precio: 99999,
+        img:'./img/relojes/Applewatch-Series5.png',
+        categoria: 'Smartwatch',
+        promocion: false,
+        favorito: false
+    },
+    {
+        id: 8,
+        nombre:'Huawei TT-500',
+        descripcion: 'El TT-500 de Huawei trae consigo la nueva tecnologia 5G en la cual son pioneros, camara de 15px y conexion directa a cualquier Huawei mediante el sistema MiHuawei',
+        precio: 119999,
+        img:'./img/relojes/Huawei-TT500.png',
+        categoria: 'Smartwatch',
+        promocion: true,
+        promocionP: 115999,
+        favorito: false
+    },
+    {
+        id: 9,
+        nombre:'Katerpiler Mondeo',
+        descripcion: 'El Mondeo trae consigo brujula, cronometro, medidor de pulsaciones, pasos y cuenta distancia. Katerpilar habla de el por su nueva funcion, su termometro integrado',
+        precio: 29999,
+        img:'./img/relojes/Katerpiler-Mondeo.png',
+        categoria: 'Todoterreno',
+        promocion: false,
+        favorito: false
+    },
+    {
+        id: 10,
+        nombre:'Samsung Active',
+        descripcion: 'Samsung no podía ser menos y entro al negocio de los relojes dijitales con su Active, un reloj simple pero moderno, conexion 3G, GPS, y funcionalidades varias',
+        precio: 39999,
+        img:'./img/relojes/Samsung-Active.png',
+        categoria: 'Smartwatch',
+        promocion: true,
+        promocionP: 34999,
+        favorito: false
+    },
+    {
+        id: 11,
+        nombre:'Skmei 1507',
+        descripcion: 'El 1507 de Skmei es un reloj para un superviviente, trae consigo brujula, nivelador, y varias microfunciones como cronometro, temporalizador, etc. Resistente al agua y sumergible hasta 25mts',
+        precio: 19999,
+        img:'./img/relojes/Skmei-1507.png',
+        categoria: 'Todoterreno',
+        promocion: false,
+        favorito: false
+    },
+    {
+        id: 12,
+        nombre:'Suunto Minerbo',
+        descripcion: 'Minerbo es el nuevo reloj de Suunto, brujula integrada, vidrio anti rayaduras y sumergible hasta mas de 35 mts. Trae integrado un pulsometro el cual te ira mostrando tus pulsaciones',
+        precio: 30000,
+        img:'./img/relojes/Suunto-Minerbo.png',
+        categoria: 'Todoterreno',
+        promocion: false,
+        favorito: false
+    },
+    {
+        id: 13,
+        nombre:'Xiaomi Infinity',
+        descripcion: 'Pulsometro, detector de oxigeno en sangre y gps integrado. Conexion a 3G para mandar y recibir mensajes aparte de un sistema de IA autonomo integrado',
+        precio: 79999,
+        img:'./img/relojes/Xiaomi-Infinity.png',
+        categoria: 'Smartwatch',
+        promocion: false,
+        favorito: false
+    },
+];
+
+var InicioBtn = d.getElementById('InicioBtn');
+var PromocionesBtn = d.getElementById('PromocionesBtn');
+var ElegantesBtn = d.getElementById('ElegantesBtn');
+var TodoterrenoBtn = d.getElementById('TodoterrenoBtn');
+var SmartwatchBtn = d.getElementById('SmartwatchBtn');
+var FavoritosBtn = d.getElementById('FavoritosBtn');
+var h1 = d.querySelector('h1');
+
+InicioBtn.addEventListener('click', function(){
+    displayProductos('Todos');
+});
+PromocionesBtn.addEventListener('click', function(){
+    displayProductos('Promociones');
+});
+ElegantesBtn.addEventListener('click', function(){
+    displayProductos('Elegante');
+});
+TodoterrenoBtn.addEventListener('click', function(){
+    displayProductos('Todoterreno');
+});
+SmartwatchBtn.addEventListener('click', function(){
+    displayProductos('Smartwatch');
+});
+FavoritosBtn.addEventListener('click', function(){
+    displayProductos('Favoritos');
+});
+h1.addEventListener('click', function(){
+    displayProductos('Todos');
+});
+
+/* <!----- CATEGORIZACIÓN Y MODAL DE PRODUCTOS -----!> */
+
+function displayProductos(categoria){
+
+    let titulo, ul, producto, img, contenedor, nombre, descripcion, contenedorS, contenedorP, precio, precioP, favorito, contRows = 0;
+
+    let nav = d.getElementsByTagName('nav')[0];
+
+    if(window.screen.width < 900){
+        nav.style.transform = 'translateX(-100%)';
+    }
+
+    if(listadoProductos.childNodes.length == 4){
+
+        if(d.querySelector('#listadoProductos ul')){
+            listadoProductos.removeChild(d.querySelector('#listadoProductos h2'));
+            listadoProductos.removeChild(d.querySelector('.banner'));
+            listadoProductos.removeChild(d.querySelector('#listadoProductos ul'));
+        }else{
+            listadoProductos.removeChild(d.querySelector('#listadoProductos h2'));
+            listadoProductos.removeChild(d.querySelector('.banner'));
+            listadoProductos.removeChild(d.querySelector('#listadoProductos h3'));
+        }
+    }else if(listadoProductos.childNodes.length == 3){
+
+        if(d.querySelector('#listadoProductos ul')){
+            listadoProductos.removeChild(d.querySelector('#listadoProductos h2'));
+            listadoProductos.removeChild(d.querySelector('#listadoProductos ul'));
+        }else{
+            listadoProductos.removeChild(d.querySelector('#listadoProductos h2'));
+            listadoProductos.removeChild(d.querySelector('#listadoProductos h3'));
+        }
+    }
+
+    if(d.getElementById('modalCheckOut')){
+        main.removeChild(d.getElementById('modalCheckOut'));
+    }
+    if(d.getElementById('carritoModal')){
+        main.removeChild(d.getElementById('carritoModal'));
+        main.removeChild(d.getElementById('carritoFondo'));
+    }
+    
+    if(categoria == 'Todos'){
+
+        displayBanners();
+
+        titulo = d.createElement('h2');
+        titulo.innerHTML = 'Todos los productos';
+
+        ul = d.createElement('ul');
+        cerrarModalProducto();
+
+        for(let i = 0; i < aProductos.length; i++){
+
+            producto = d.createElement('li');
+            producto.addEventListener('click', displayModalProducto);
+            producto.setAttribute('data-id', aProductos[i].id);
+
+            img = d.createElement('img');
+            img.setAttribute('alt', aProductos[i].nombre);
+            img.setAttribute('src', aProductos[i].img);
+
+            contenedor = d.createElement('div');
+            contenedor.setAttribute('class', 'contenedorPrincipal');
+
+            nombre = d.createElement('h3');
+            nombre.innerHTML = aProductos[i].nombre;
+
+            descripcion = d.createElement('p');
+            descripcion.innerHTML = aProductos[i].descripcion;
+
+            contenedorS = d.createElement('div');
+            contenedorS.setAttribute('class', 'contenedorSecundario');
+
+            contenedorP = d.createElement('div');
+            precio = d.createElement('p');
+
+            if(aProductos[i].promocion){
+
+                precioP = d.createElement('p');
+                precio.innerHTML = '$' + aProductos[i].precio;
+                precioP.innerHTML = '$' + aProductos[i].promocionP;
+
+                contenedorP.setAttribute('class', 'promocion');
+                
+                contenedorP.appendChild(precioP);
+                contenedorP.appendChild(precio);
+
+            }else{
+
+                precio.innerHTML = '$' + aProductos[i].precio;
+
+                contenedorP.setAttribute('class', 'noPromocion');
+
+                contenedorP.appendChild(precio);
+            }
+
+            favorito = d.createElement('span');
+            if(aProductos[i].favorito){
+                favorito.innerHTML = 'Esta en favoritos';
+                favorito.setAttribute('class', 'isFavorite');
+            }else{
+                favorito.innerHTML = 'No esta en favoritos';
+                favorito.setAttribute('class', 'isNotFavorite');
+            }
+
+            favorito.addEventListener('click', changeFav);
+            favorito.setAttribute('data-id', aProductos[i].id);
+
+            contenedorS.appendChild(contenedorP);
+            contenedorS.appendChild(favorito);
+
+            contenedor.appendChild(nombre);
+            contenedor.appendChild(descripcion);
+            contenedor.appendChild(contenedorS);
+
+            producto.appendChild(img);
+            producto.appendChild(contenedor);
+
+            ul.style.gridTemplateRows = 'repeat('+ window.screen.width < 600 ? aProductos.length : (aProductos.length / 2) +', 1fr)';
+
+            ul.appendChild(producto);
+
+        }
+
+        listadoProductos.appendChild(titulo);
+        listadoProductos.appendChild(ul);
+
+    }else if(categoria == 'Elegante' || categoria == 'Todoterreno' || categoria == 'Smartwatch'){
+
+        displayBanners();
+
+        titulo = d.createElement('h2');
+        titulo.innerHTML = categoria;
+
+        ul = d.createElement('ul');
+        cerrarModalProducto();
+
+        for(let i = 0; i < aProductos.length; i++){
+
+            if(aProductos[i].categoria == categoria){
+
+            contRows++;
+
+            producto = d.createElement('li');
+            producto.addEventListener('click', displayModalProducto);
+            producto.setAttribute('data-id', aProductos[i].id);
+
+            img = d.createElement('img');
+            img.setAttribute('alt', aProductos[i].nombre);
+            img.setAttribute('src', aProductos[i].img);
+
+            contenedor = d.createElement('div');
+            contenedor.setAttribute('class', 'contenedorPrincipal');
+
+            nombre = d.createElement('h3');
+            nombre.innerHTML = aProductos[i].nombre;
+
+            descripcion = d.createElement('p');
+            descripcion.innerHTML = aProductos[i].descripcion;
+
+            contenedorS = d.createElement('div');
+            contenedorS.setAttribute('class', 'contenedorSecundario');
+
+            contenedorP = d.createElement('div');
+            precio = d.createElement('p');
+
+            if(aProductos[i].promocion){
+
+                precioP = d.createElement('p');
+                precio.innerHTML = '$' + aProductos[i].precio;
+                precioP.innerHTML = '$' + aProductos[i].promocionP;
+
+                contenedorP.setAttribute('class', 'promocion');
+                
+                contenedorP.appendChild(precioP);
+                contenedorP.appendChild(precio);
+
+            }else{
+
+                precio.innerHTML = '$' + aProductos[i].precio;
+                
+                contenedorP.setAttribute('class', 'noPromocion');
+
+                contenedorP.appendChild(precio);
+            }
+
+            favorito = d.createElement('span');
+            if(aProductos[i].favorito){
+                favorito.innerHTML = 'Esta en favoritos';
+                favorito.setAttribute('class', 'isFavorite');
+            }else{
+                favorito.innerHTML = 'No esta en favoritos';
+                favorito.setAttribute('class', 'isNotFavorite');
+            }
+
+            favorito.addEventListener('click', changeFav);
+            favorito.setAttribute('data-id', aProductos[i].id);
+
+            contenedorS.appendChild(contenedorP);
+            contenedorS.appendChild(favorito);
+
+            contenedor.appendChild(nombre);
+            contenedor.appendChild(descripcion);
+            contenedor.appendChild(contenedorS);
+
+            producto.appendChild(img);
+            producto.appendChild(contenedor);
+
+            ul.style.gridTemplateRows = 'repeat('+ window.screen.width < 600 ? contRows : (contRows / 2) +', 1fr)';
+
+            ul.appendChild(producto);
+
+            }
+
+        }
+
+        listadoProductos.appendChild(titulo);
+        listadoProductos.appendChild(ul);
+
+    }else if(categoria == 'Favoritos'){
+
+        displayBanners();
+
+        let cont = 0;
+
+        titulo = d.createElement('h2');
+        titulo.innerHTML = categoria;
+
+        ul = d.createElement('ul');
+        cerrarModalProducto();
+
+        for(let i = 0; i < aProductos.length; i++){
+
+            if(aProductos[i].favorito){
+
+            cont++;
+
+            contRows++;
+
+            producto = d.createElement('li');
+            producto.addEventListener('click', displayModalProducto);
+            producto.setAttribute('data-id', aProductos[i].id);
+
+            img = d.createElement('img');
+            img.setAttribute('alt', aProductos[i].nombre);
+            img.setAttribute('src', aProductos[i].img);
+
+            contenedor = d.createElement('div');
+            contenedor.setAttribute('class', 'contenedorPrincipal');
+
+            nombre = d.createElement('h3');
+            nombre.innerHTML = aProductos[i].nombre;
+
+            descripcion = d.createElement('p');
+            descripcion.innerHTML = aProductos[i].descripcion;
+
+            contenedorS = d.createElement('div');
+            contenedorS.setAttribute('class', 'contenedorSecundario');
+
+            contenedorP = d.createElement('div');
+            precio = d.createElement('p');
+
+            if(aProductos[i].promocion){
+
+                precioP = d.createElement('p');
+                precio.innerHTML = '$' + aProductos[i].precio;
+                precioP.innerHTML = '$' + aProductos[i].promocionP;
+
+                contenedorP.setAttribute('class', 'promocion');
+                
+                contenedorP.appendChild(precioP);
+                contenedorP.appendChild(precio);
+
+            }else{
+
+                precio.innerHTML = '$' + aProductos[i].precio;
+                
+                contenedorP.setAttribute('class', 'noPromocion');
+
+                contenedorP.appendChild(precio);
+            }
+
+            favorito = d.createElement('span');
+            if(aProductos[i].favorito){
+                favorito.innerHTML = 'Esta en favoritos';
+                favorito.setAttribute('class', 'isFavorite');
+            }else{
+                favorito.innerHTML = 'No esta en favoritos';
+                favorito.setAttribute('class', 'isNotFavorite');
+            }
+
+            favorito.addEventListener('click', changeFav);
+            favorito.setAttribute('data-id', aProductos[i].id);
+
+            contenedorS.appendChild(contenedorP);
+            contenedorS.appendChild(favorito);
+
+            contenedor.appendChild(nombre);
+            contenedor.appendChild(descripcion);
+            contenedor.appendChild(contenedorS);
+
+            producto.appendChild(img);
+            producto.appendChild(contenedor);
+
+            ul.style.gridTemplateRows = 'repeat('+  window.screen.width < 600 ? contRows : (contRows / 2) +', 1fr)';
+
+            ul.appendChild(producto);
+
+            }
+
+        }
+
+        let noFav = d.createElement('h3');
+        noFav.innerHTML = 'No tenes relojes favoritos por el momento';
+        noFav.setAttribute('class', 'noFav');
+
+        listadoProductos.appendChild(titulo);
+        if(cont == 0){
+            listadoProductos.appendChild(noFav);
+        }else{
+            listadoProductos.appendChild(ul);
+        }
+
+    }else if(categoria == 'Promociones'){
+
+        displayBanners();
+
+        titulo = d.createElement('h2');
+        titulo.innerHTML = categoria;
+
+        ul = d.createElement('ul');
+        cerrarModalProducto();
+
+        for(let i = 0; i < aProductos.length; i++){
+
+            if(aProductos[i].promocion){
+
+            contRows++;
+
+            producto = d.createElement('li');
+            producto.addEventListener('click', displayModalProducto);
+            producto.setAttribute('data-id', aProductos[i].id);
+
+            img = d.createElement('img');
+            img.setAttribute('alt', aProductos[i].nombre);
+            img.setAttribute('src', aProductos[i].img);
+
+            contenedor = d.createElement('div');
+            contenedor.setAttribute('class', 'contenedorPrincipal');
+
+            nombre = d.createElement('h3');
+            nombre.innerHTML = aProductos[i].nombre;
+
+            descripcion = d.createElement('p');
+            descripcion.innerHTML = aProductos[i].descripcion;
+
+            contenedorS = d.createElement('div');
+            contenedorS.setAttribute('class', 'contenedorSecundario');
+
+            contenedorP = d.createElement('div');
+            precio = d.createElement('p');
+
+            if(aProductos[i].promocion){
+
+                precioP = d.createElement('p');
+                precio.innerHTML = '$' + aProductos[i].precio;
+                precioP.innerHTML = '$' + aProductos[i].promocionP;
+
+                contenedorP.setAttribute('class', 'promocion');
+                
+                contenedorP.appendChild(precioP);
+                contenedorP.appendChild(precio);
+
+            }else{
+
+                precio.innerHTML = '$' + aProductos[i].precio;
+                
+                contenedorP.setAttribute('class', 'noPromocion');
+
+                contenedorP.appendChild(precio);
+            }
+            favorito = d.createElement('span');
+            if(aProductos[i].favorito){
+                favorito.innerHTML = 'Esta en favoritos';
+                favorito.setAttribute('class', 'isFavorite');
+            }else{
+                favorito.innerHTML = 'No esta en favoritos';
+                favorito.setAttribute('class', 'isNotFavorite');
+            }
+
+            favorito.addEventListener('click', changeFav);
+            favorito.setAttribute('data-id', aProductos[i].id);
+
+            contenedorS.appendChild(contenedorP);
+            contenedorS.appendChild(favorito);
+
+            contenedor.appendChild(nombre);
+            contenedor.appendChild(descripcion);
+            contenedor.appendChild(contenedorS);
+
+            producto.appendChild(img);
+            producto.appendChild(contenedor);
+
+            ul.style.gridTemplateRows = 'repeat('+  window.screen.width < 600 ? contRows : (contRows / 2) +', 1fr)';
+
+            ul.appendChild(producto);
+
+            }
+
+        }
+
+        listadoProductos.appendChild(titulo);
+        listadoProductos.appendChild(ul);
+        
+    }
+
+
+}
+
+function displayModalProducto() {
+
+    if(d.getElementsByClassName('modalProducto')[0]){
+        main.removeChild(d.getElementsByClassName('modalProducto')[0]);
+    }
+
+    main.style.overflowY = 'hidden';
+
+    let id = this.getAttribute('data-id'), modal, cerrar, cerrarSpan, img, div, div1, div2, div3, div4, nombre, favorito, descripcion, precio, precioP, btnCarrito, btnCompra;
+
+    modal = d.createElement('div');
+    modal.setAttribute('class', 'modalProducto');
+    modal.setAttribute('data-id', id);
+
+    cerrar = d.createElement('span');
+    cerrar.setAttribute('class', 'modalCerrarBtn');
+    cerrar.innerHTML = 'Cerrar pestaña';
+    cerrar.addEventListener('click', cerrarModalProducto);
+
+    cerrarSpan = d.createElement('span');
+
+    img = d.createElement('img');
+    img.setAttribute('src', aProductos[id].img);
+    img.setAttribute('alt', aProductos[id].nombre);
+
+    div = d.createElement('div');
+    div.setAttribute('class', 'modalProductoContenedor');
+
+    div1 = d.createElement('div');
+    div1.setAttribute('class', 'modalProductoContenedor1');
+
+    div2 = d.createElement('div');
+    div2.setAttribute('class', 'modalProductoContenedor2');
+
+    nombre = d.createElement('h3');
+    nombre.innerHTML = aProductos[id].nombre;
+
+    favorito = d.createElement('span');
+
+    if(aProductos[id].favorito){
+        favorito.innerHTML = 'Esta en favoritos';
+        favorito.setAttribute('class', 'isFavorite');
+    }else{
+        favorito.innerHTML = 'No esta en favoritos';
+        favorito.setAttribute('class', 'isNotFavorite');
+    }
+
+    favorito.addEventListener('click', changeFav);
+    favorito.setAttribute('data-id', aProductos[id].id);
+
+    div2.appendChild(nombre);
+    div2.appendChild(favorito);
+
+    descripcion = d.createElement('p');
+    descripcion.innerHTML = aProductos[id].descripcion;
+
+    div3 = d.createElement('div');
+
+    precio = d.createElement('p');
+
+    if(aProductos[id].promocion){
+
+        precioP = d.createElement('p');
+        precio.innerHTML = '$' + aProductos[id].precio;
+        precioP.innerHTML = '$' + aProductos[id].promocionP;
+
+        div3.setAttribute('class', 'promocionModal');
+                
+        div3.appendChild(precioP);
+        div3.appendChild(precio);
+
+    }else{
+
+        precio.innerHTML = '$' + aProductos[id].precio;
+                
+        div3.setAttribute('class', 'noPromocion');
+
+        div3.appendChild(precio);
+    }
+
+    div4 = d.createElement('div');
+    div4.setAttribute('class', 'divBtns');
+
+    btnCarrito = d.createElement('a');
+    btnCarrito.innerHTML = 'Agregar al carrito';
+    btnCarrito.addEventListener('click', agregarCarrito);
+    btnCarrito.setAttribute('data-id', id);
+
+    btnCompra = d.createElement('a');
+    btnCompra.innerHTML = 'Comprar';
+    btnCompra.setAttribute('data-id', id);
+    btnCompra.addEventListener('click', compraDirecta);
+
+    div4.appendChild(btnCarrito);
+    div4.appendChild(btnCompra);
+
+    cerrar.appendChild(cerrarSpan);
+    modal.appendChild(cerrar);
+
+    div.appendChild(div2);
+    div.appendChild(descripcion);
+    div.appendChild(div3);
+    div.appendChild(div4);
+
+    modal.appendChild(img);
+    modal.appendChild(div);
+
+    main.appendChild(modal);
+    ajustarProdModal();
+
+}
+
+function cerrarModalProducto(){
+
+    if(d.getElementsByClassName('modalProducto')[0]){
+        main.removeChild(d.getElementsByClassName('modalProducto')[0]);
+    }
+
+    main.style.overflowY = 'scroll';
+
+}
+
+
+function changeFav(e){
+
+    let id = this.getAttribute('data-id');
+
+    if(aProductos[id].favorito){
+
+        aProductos[id].favorito = false;
+
+        this.removeAttribute('class');
+        this.setAttribute('class', 'isNotFavorite');
+        
+        notificacion('Removido de favoritos', 'Rojo');
+
+    }else{
+
+        aProductos[id].favorito = true;
+
+        this.removeAttribute('class');
+        this.setAttribute('class', 'isFavorite');
+        
+        notificacion('Agregado a favoritos', 'Verde');
+
+    }
+
+    e.stopPropagation();
+    
+}
+
+function cerrarNotificacion(){
+
+    if(d.getElementsByClassName('modalNotificacion')[0]){
+        main.removeChild(d.getElementsByClassName('modalNotificacion')[0]);
+    }
+
+}
+
+window.addEventListener('resize', adaptarListado);
+
+function adaptarListado() {
+
+    let listado = d.querySelector('#listadoProductos ul');
+
+    if(window.screen.width < 600){
+        listado.style.gridTemplateRows = 'repeat('+listado.childNodes.length+', 1fr)';
+    }else{
+        listado.style.gridTemplateRows = 'repeat('+(listado.childNodes.length / 2)+', 1fr)';
+    }
+
+}
+
+
+/* <!----- CARRITO DE COMPRAS -----!> */
+
+var aCarrito = [];
+
+function agregarCarrito() {
+
+    if(aCarrito[0] == undefined){
+
+        aCarrito.push({
+            id: aProductos[this.getAttribute('data-id')].id,
+            cant: 1
+        });
+
+        notificacion('Agregado al carrito', 'Verde');
+
+        if(aProductos[this.getAttribute('data-id')].promocion){
+            totalCont += aProductos[this.getAttribute('data-id')].promocionP
+        }else{
+            totalCont += aProductos[this.getAttribute('data-id')].precio
+        }
+
+    }else{
+
+        for(let i = 0; i < aCarrito.length; i++){
+
+            if(aCarrito[i].id == this.getAttribute('data-id')){
+    
+                aCarrito[i].cant++;
+                notificacion('Agregado al carrito', 'Verde');
+                if(aProductos[this.getAttribute('data-id')].promocion){
+                    totalCont += aProductos[this.getAttribute('data-id')].promocionP
+                }else{
+                    totalCont += aProductos[this.getAttribute('data-id')].precio
+                }
+                
+            
+            }else{
+    
+                if(i < aCarrito.length - 1){
+
+                    continue;
+
+                }else{
+
+                    aCarrito.push({
+                        id: aProductos[this.getAttribute('data-id')].id,
+                        cant: 1
+                    });
+                    notificacion('Agregado al carrito', 'Verde');
+
+                    if(aProductos[this.getAttribute('data-id')].promocion){
+                        totalCont += aProductos[this.getAttribute('data-id')].promocionP
+                    }else{
+                        totalCont += aProductos[this.getAttribute('data-id')].precio
+                    }
+
+                    break;
+
+                }
+    
+    
+            }
+    
+        }
+
+    }
+
+}
+
+const carritoBtn = d.getElementById('carritoBtn');
+
+carritoBtn.addEventListener('click', displayCarrito);
+
+function displayCarrito() {
+
+    let carrito, title, fondo, divProd, img, divGrid, div1, divTitle, nombre, eliminar, eliminarSpan, div2, div3, cant, restar, sumar, precio, checkOutBtn, cont = 0, total;
+    
+    if(d.getElementById('carritoModal')){
+
+        main.removeChild(d.getElementById('carritoModal'));
+        main.removeChild(d.getElementById('carritoFondo'));
+        main.style.overflowY='scroll';
+
+    }else{
+
+        title = d.createElement('h2');
+        title.innerHTML = "Carrito de compra";
+       
+        carrito = d.createElement('div');
+        carrito.setAttribute('id', 'carritoModal');
+
+        fondo = d.createElement('div');
+        fondo.setAttribute('id', 'carritoFondo');
+
+        divGrid = d.createElement('div');
+        divGrid.setAttribute('id', 'carritoGrid');
+
+        carrito.appendChild(title);
+
+
+        for(let i = 0; i < aCarrito.length; i++){
+
+            cont++;
+
+            divProd = d.createElement('div');
+            divProd.setAttribute('class', 'carritoProd');
+            divProd.setAttribute('data-id', i);
+
+            img = d.createElement('img');
+            img.setAttribute('src', aProductos[aCarrito[i].id].img);
+            img.setAttribute('alt', aProductos[aCarrito[i].id].nombre);
+
+            div1 = d.createElement('div');
+            div1.setAttribute('class', 'carritoDiv1');
+
+            divTitle = d.createElement('div');
+            divTitle.setAttribute('class', 'carritoDivTitle');
+
+            nombre = d.createElement('h3');
+            nombre.innerHTML = aProductos[aCarrito[i].id].nombre;
+
+            eliminar = d.createElement('label');
+            eliminar.setAttribute('data-id', aCarrito[i].id);
+            eliminar.setAttribute('data-carritoId', i);
+            eliminar.innerHTML = 'Eliminar producto';
+            eliminar.addEventListener('click', eliminarProductoCarrito);
+
+            eliminarSpan = d.createElement('span');
+
+            eliminar.appendChild(eliminarSpan);
+
+            divTitle.appendChild(nombre);
+            divTitle.appendChild(eliminar);
+
+            div2 = d.createElement('div');
+            div2.setAttribute('class', 'carritoDiv2');
+
+            div3 = d.createElement('div');
+            div3.setAttribute('class', 'carritoDiv3');
+            
+            restar = d.createElement('span');
+            restar.innerHTML = 'Restar cantidad';
+            restar.setAttribute('data-id', aCarrito[i].id);
+            restar.setAttribute('data-operacion', 'restar');
+            restar.addEventListener('click', cambiarCantidad);
+
+            cant = d.createElement('p');
+            cant.innerHTML = aCarrito[i].cant;
+
+            sumar = d.createElement('span');
+            sumar.innerHTML = 'Sumar cantidad';
+            sumar.setAttribute('data-id', aCarrito[i].id);
+            sumar.setAttribute('data-operacion', 'sumar');
+            sumar.addEventListener('click', cambiarCantidad);
+
+            div3.appendChild(restar);
+            div3.appendChild(cant);
+            div3.appendChild(sumar);
+
+            precio = d.createElement('p');
+
+            if(aProductos[aCarrito[i].id].promocion){
+                precio.innerHTML ="$"+ aProductos[aCarrito[i].id].promocionP;
+            }else{
+                precio.innerHTML ="$"+ aProductos[aCarrito[i].id].precio * aCarrito[i].cant;
+            }
+
+            div2.appendChild(div3);
+            div2.appendChild(precio);
+
+            div1.appendChild(divTitle);
+            div1.appendChild(div2);
+
+            divProd.appendChild(img);
+            divProd.appendChild(div1);
+
+            divGrid.appendChild(divProd);
+
+        }
+
+        total = d.createElement('p');
+        total.setAttribute('id', 'totalCarrito');
+        total.innerHTML = 'Total: $'+totalCont;
+
+        checkOutBtn = d.createElement('a');
+        checkOutBtn.setAttribute('class', 'checkOutBtn');
+        checkOutBtn.addEventListener('click', preCheckOut);
+        checkOutBtn.innerHTML = 'Ir a pagar';
+
+        carrito.appendChild(divGrid);
+        carrito.appendChild(total);
+        carrito.appendChild(checkOutBtn);
+
+        divGrid.style.gridTemplateRows = 'repeat('+cont+', 120px)';
+
+        main.appendChild(fondo);
+        main.appendChild(carrito);
+        main.style.overflowY='hidden';
+        ajustarCarrito();
+
+    }
+
+}
+
+function eliminarProductoCarrito() {
+
+    let totalCarrito = d.getElementById('totalCarrito');
+    let precio = aProductos[this.getAttribute('data-id')].precio;
+    let precioPromo = aProductos[this.getAttribute('data-id')].promocionP;
+    let cant = aCarrito[this.getAttribute('data-carritoid')].cant;
+
+    let carrito = d.getElementById('carritoGrid');
+
+    aCarrito.splice(this.getAttribute('data-id'), 1);
+
+    carrito.removeChild(this.parentNode.parentNode.parentNode);
+    notificacion('Eliminado del carrito', 'Rojo');
+
+    if(aProductos[this.getAttribute('data-id')].promocion){
+        totalCarrito.innerHTML = 'Total: $'+(totalCont - (precioPromo * cant));
+    }else{
+        totalCarrito.innerHTML = 'Total: $'+(totalCont - (precio * cant));
+    }
+}
+
+function cambiarCantidad () {
+
+    let totalCarrito = d.getElementById('totalCarrito');
+
+    for(let i = 0; i < aCarrito.length; i++){
+
+        if(this.getAttribute('data-operacion') == 'restar'){
+    
+            if(aCarrito[i].id == this.getAttribute('data-id')){
+
+                if(aCarrito[i].cant == 1){
+
+                    break;
+
+                }else{
+
+
+                    aCarrito[i].cant--;
+                    this.nextSibling.innerHTML = aCarrito[i].cant;
+
+                    if(aProductos[aCarrito[i].id].promocion){
+                        totalCont -= aProductos[aCarrito[i].id].promocionP;
+                    }else{
+                        totalCont -= aProductos[aCarrito[i].id].precio;
+                    }
+
+                    totalCarrito.innerHTML = 'Total: $'+totalCont;
+    
+                    break;
+
+                }
+            }
+        }else{
+
+            if(aCarrito[i].id == this.getAttribute('data-id')){
+
+                aCarrito[i].cant++;
+                this.previousSibling.innerHTML = aCarrito[i].cant;
+
+                if(aProductos[aCarrito[i].id].promocion){
+                    totalCont += aProductos[aCarrito[i].id].promocionP;
+                }else{
+                    totalCont += aProductos[aCarrito[i].id].precio;
+                }
+
+                totalCarrito.innerHTML = 'Total: $'+totalCont;
+
+                break;
+
+            }
+
+        }
+
+    }
+
+}
+
+
+/* <!----- CHECKOUT -----!> */
+
+function compraDirecta() {
+
+    if(aCarrito[0] == undefined){
+
+        aCarrito.push({
+            id: aProductos[this.getAttribute('data-id')].id,
+            cant: 1
+        });
+
+        if(aProductos[this.getAttribute('data-id')].promocion){
+            totalCont += aProductos[this.getAttribute('data-id')].promocionP
+        }else{
+            totalCont += aProductos[this.getAttribute('data-id')].precio
+        }
+
+    }else{
+
+        for(let i = 0; i < aCarrito.length; i++){
+
+            if(aCarrito[i].id == this.getAttribute('data-id')){
+    
+                aCarrito[i].cant++;
+                if(aProductos[this.getAttribute('data-id')].promocion){
+                    totalCont += aProductos[this.getAttribute('data-id')].promocionP
+                }else{
+                    totalCont += aProductos[this.getAttribute('data-id')].precio
+                }
+            
+            }else{
+    
+                if(i < aCarrito.length - 1){
+
+                    continue;
+
+                }else{
+
+                    aCarrito.push({
+                        id: aProductos[this.getAttribute('data-id')].id,
+                        cant: 1
+                    });
+                    if(aProductos[this.getAttribute('data-id')].promocion){
+                        totalCont += aProductos[this.getAttribute('data-id')].promocionP
+                    }else{
+                        totalCont += aProductos[this.getAttribute('data-id')].precio
+                    }
+
+                    break;
+
+                }
+    
+    
+            }
+    
+        }
+
+    }
+
+    checkOut();
+
+}
+
+function preCheckOut(){
+    if(aCarrito.length == 0){
+        notificacion('Tu carrito esta vacio', 'Rojo');
+    }else{
+        checkOut();
+    }
+}
+
+function checkOut(){
+    
+    let modalCheckOut, cerrar, cerrarSpan, title1, divCarrito, ulCarrito, divProd, img, nombre, div, div2, div3, cant, precio, precioTotal, total, totalCont = 0;
+
+    if(d.getElementsByClassName('modalProducto')[0]){
+        main.removeChild(d.getElementsByClassName('modalProducto')[0]);
+    }
+
+    if(d.getElementById('carritoModal')){
+        main.removeChild(d.getElementById('carritoModal'));
+        main.removeChild(d.getElementById('carritoFondo'));
+    }
+
+    modalCheckOut = d.createElement('div');
+    modalCheckOut.setAttribute('id', 'modalCheckOut');
+    modalCheckOut.style.overflowY = 'scroll';
+    
+
+    cerrar = d.createElement('label');
+    cerrar.innerHTML = 'Cerrar';
+    cerrar.addEventListener('click', cerrarCheckOut)
+    cerrar.setAttribute('class', 'labelCerrar');
+
+    cerrarSpan = d.createElement('span');
+
+    cerrar.appendChild(cerrarSpan);
+
+    title1 = d.createElement('h2');
+    title1.innerHTML = 'Productos';
+
+    divCarrito = d.createElement('div');
+    divCarrito.setAttribute('class', 'divCheckOutCarrito');
+
+    ulCarrito = d.createElement('ul');
+    ulCarrito.setAttribute('class', 'ulCheckOutCarrito');
+    ulCarrito.style.gridTemplateRows = 'repeat('+ aCarrito.length+', 160px)';
+
+    for(let i = 0; i < aCarrito.length; i++){
+
+        divProd = d.createElement('li');
+        
+        img = d.createElement('img');
+        img.setAttribute('src', aProductos[aCarrito[i].id].img);
+        img.setAttribute('alt', aProductos[aCarrito[i].id].nombre);
+
+        nombre = d.createElement('h3');
+        nombre.innerHTML = aProductos[aCarrito[i].id].nombre;
+
+        div = d.createElement('div');
+        div.setAttribute('class', 'checkOutDiv1');
+
+        div2 = d.createElement('div');
+        div2.setAttribute('class', 'checkOutDiv2');
+
+        div3 = d.createElement('div');
+        div3.setAttribute('class', 'checkOutDiv3');
+
+        cant = d.createElement('p');
+        cant.innerHTML = aCarrito[i].cant + (aCarrito[i].cant >= 2 ?' unidades' : ' unidad');
+
+        precio = d.createElement('p');
+        precioTotal = d.createElement('p');
+
+        if(aProductos[aCarrito[i].id].promocion){
+            precio.innerHTML = '$ '+ aProductos[aCarrito[i].id].promocionP;
+            precioTotal.innerHTML = '$'+ aProductos[aCarrito[i].id].promocionP * aCarrito[i].cant;
+            totalCont += aProductos[aCarrito[i].id].promocionP * aCarrito[i].cant
+        }else{
+            precio.innerHTML = '$ '+ aProductos[aCarrito[i].id].precio;
+            precioTotal.innerHTML = '$'+ aProductos[aCarrito[i].id].precio * aCarrito[i].cant;
+            totalCont += aProductos[aCarrito[i].id].precio * aCarrito[i].cant
+        }
+        
+        div3.appendChild(precio);
+        div3.appendChild(precioTotal);
+
+
+        div2.appendChild(cant);
+        div2.appendChild(div3);
+
+        div.appendChild(nombre);
+        div.appendChild(div2);
+
+        divProd.appendChild(img);
+        divProd.appendChild(div);
+
+
+        ulCarrito.appendChild(divProd);
+    }
+
+    total = d.createElement('p');
+    total.setAttribute('class', 'totalCarritoCheckOut')
+    total.innerHTML = 'Total: $' + totalCont;
+
+    divCarrito.appendChild(title1);
+    divCarrito.appendChild(ulCarrito);
+    divCarrito.appendChild(total);
+
+    let divForm, title2, form, opcionEnvio, labelEnvio, divEnvio, span1Envio, span2Envio, span3Envio, opcionRetiro, labelRetiro, divRetiro, span1Retiro, span2Retiro, span3Retiro;
+
+    divForm = d.createElement('div');
+    divForm.setAttribute('class', 'divCheckOutForm');
+
+    title2 = d.createElement('h2');
+    title2.innerHTML = 'Opciones de envio'
+
+    form = d.createElement('form');
+
+    labelEnvio = d.createElement('label');
+    labelEnvio.setAttribute('class', 'labelEnvioRetiro');
+    labelEnvio.setAttribute('id', 'labelEnvio');
+    labelEnvio.setAttribute('for', 'Envio');
+    labelEnvio.addEventListener('click', seleccionar);
+
+    divEnvio = d.createElement('div');
+    divEnvio.setAttribute('class', 'divLabelEnvioRetiro');
+
+    span1Envio = d.createElement('span');
+    span1Envio.innerHTML = 'Envio a domicilio';
+
+    span2Envio = d.createElement('span');
+    span2Envio.innerHTML = 'Llega en 2 días';
+
+    span3Envio = d.createElement('span');
+    span3Envio.innerHTML = '$400';
+    span3Envio.setAttribute('class', 'spanLabelEnvioRetiro');
+
+    divEnvio.appendChild(span1Envio);
+    divEnvio.appendChild(span2Envio);
+
+    labelEnvio.appendChild(divEnvio);
+    labelEnvio.appendChild(span3Envio);
+
+    opcionEnvio = d.createElement('input');
+    opcionEnvio.setAttribute('type', 'radio');
+    opcionEnvio.setAttribute('name','opcionEnvio');
+    opcionEnvio.setAttribute('value', 'Envio');
+    opcionEnvio.setAttribute('id', 'Envio');
+
+    labelRetiro = d.createElement('label');
+    labelRetiro.setAttribute('class', 'labelEnvioRetiro');
+    labelRetiro.setAttribute('id', 'labelRetiro');
+    labelRetiro.setAttribute('for', 'Retiro');
+    labelRetiro.addEventListener('click', seleccionar);
+
+
+    divRetiro = d.createElement('div');
+    divRetiro.setAttribute('class', 'divLabelEnvioRetiro');
+
+    span1Retiro = d.createElement('span');
+    span1Retiro.innerHTML = 'Retirar por el local';
+
+    span2Retiro = d.createElement('span');
+    span2Retiro.innerHTML = 'Montañeses 1548';
+
+    span3Retiro = d.createElement('span');
+    span3Retiro.innerHTML = 'Gratis';
+    span3Retiro.setAttribute('class', 'spanLabelEnvioRetiro');
+
+    divRetiro.appendChild(span1Retiro);
+    divRetiro.appendChild(span2Retiro);
+
+    labelRetiro.appendChild(divRetiro);
+    labelRetiro.appendChild(span3Retiro);
+
+    opcionRetiro = d.createElement('input');
+    opcionRetiro.setAttribute('type', 'radio');
+    opcionRetiro.setAttribute('name','opcionRetiro');
+    opcionRetiro.setAttribute('value', 'Retiro');
+    opcionRetiro.setAttribute('id', 'Retiro');
+    opcionRetiro.setAttribute('checked','checked');
+
+    form.appendChild(title2);
+    form.appendChild(opcionEnvio);
+    form.appendChild(opcionRetiro);
+    form.appendChild(labelRetiro);
+    form.appendChild(labelEnvio);
+
+    let title3, p1, p2, p3, p4, p5, inputNombre, inputDireccion, inputTelefono, inputTarjeta, inputCVV;
+
+    title3 = d.createElement('h2');
+    title3.innerHTML = 'Datos personales';
+
+    p1 = d.createElement('p');
+    p1.innerHTML = 'Nombre y apellido';
+    p1.setAttribute('class', 'pInput');
+
+    inputNombre = d.createElement('input');
+    inputNombre.setAttribute('type', 'text');
+    inputNombre.setAttribute('name', 'NyA');
+    inputNombre.setAttribute('class', 'inputDatos');
+
+    p2 = d.createElement('p');
+    p2.innerHTML = 'Domicilio';
+    p2.setAttribute('class', 'pInput');
+
+    inputDireccion = d.createElement('input');
+    inputDireccion.setAttribute('type', 'text');
+    inputDireccion.setAttribute('name', 'direccion');
+    inputDireccion.setAttribute('class', 'inputDatos');
+
+    p3 = d.createElement('p');
+    p3.innerHTML = 'Numero de telefono';
+    p3.setAttribute('class', 'pInput');
+
+    inputTelefono = d.createElement('input');
+    inputTelefono.setAttribute('type', 'number');
+    inputTelefono.setAttribute('name', 'telefono');
+    inputTelefono.setAttribute('class', 'inputDatos');
+
+    p4 = d.createElement('p');
+    p4.innerHTML = 'Numero de tarjeta';
+    p4.setAttribute('class', 'pInput');
+
+    inputTarjeta = d.createElement('input');
+    inputTarjeta.setAttribute('type', 'number');
+    inputTarjeta.setAttribute('name', 'tarjeta');
+    inputTarjeta.setAttribute('class', 'inputDatos');
+
+    p5 = d.createElement('p');
+    p5.innerHTML = 'CVV';
+    p5.setAttribute('class', 'pInput');
+
+    inputCVV = d.createElement('input');
+    inputCVV.setAttribute('type', 'number');
+    inputCVV.setAttribute('name', 'CVV');
+    inputCVV.setAttribute('class', 'inputDatos');
+
+
+    form.appendChild(title3);
+    form.appendChild(p1);
+    form.appendChild(inputNombre);
+    form.appendChild(p2);
+    form.appendChild(inputDireccion);
+    form.appendChild(p3);
+    form.appendChild(inputTelefono);
+    form.appendChild(p4);
+    form.appendChild(inputTarjeta);
+    form.appendChild(p5);
+    form.appendChild(inputCVV);
+
+    let submit;
+
+    submit = d.createElement('a');
+    submit.setAttribute('class', 'submit');
+    submit.innerHTML = 'Comprar';
+    submit.addEventListener('click', verificarCompra);
+
+    form.appendChild(submit);
+
+    divForm.appendChild(form);
+
+    modalCheckOut.appendChild(cerrar);
+    modalCheckOut.appendChild(divCarrito);
+    modalCheckOut.appendChild(divForm);
+
+    main.appendChild(modalCheckOut);
+}
+
+function seleccionar(){
+
+    let retiro = d.getElementById('labelRetiro'), envio = d.getElementById('labelEnvio');
+
+    if(this.getAttribute('for') == 'Retiro'){
+        retiro.style.border = '2px solid #cb3333';
+        envio.style.border = '2px solid #333';
+    }else{
+        retiro.style.border = '2px solid #333';
+        envio.style.border = '2px solid #cb3333';
+    }
+}
+
+function cerrarCheckOut(){
+
+    if(d.getElementById('modalCheckOut')){
+        main.removeChild(d.getElementById('modalCheckOut'));
+    }
+
+}
+
+function notificacion(m, c){
+
+    let modal, p, cerrar, cerrarSpan;
+
+    modal = d.createElement('div');
+
+    p = d.createElement('p');
+    p.innerHTML = m;
+
+    cerrar = d.createElement('span');
+    cerrar.innerHTML = 'Cerrar';
+    cerrar.addEventListener('click', cerrarNotificacion);
+
+    cerrarSpan = d.createElement('span');
+    
+    cerrar.appendChild(cerrarSpan);
+
+    if(c == 'Rojo'){
+
+        modal.setAttribute('class', 'modalNotificacion notificacionRoja');
+        cerrar.setAttribute('class', 'notificacionCerrar cerrarRojo');
+
+    }else{
+
+        modal.setAttribute('class', 'modalNotificacion notificacionVerde');
+        cerrar.setAttribute('class', 'notificacionCerrar cerrarVerde');
+
+    }
+
+    setTimeout(() => {
+        cerrarNotificacion();
+    }, 3000);
+
+    modal.appendChild(p);
+    modal.appendChild(cerrar);
+
+    main.appendChild(modal);
+
+}
+
+function verificarCompra(){
+
+    let inputDomicilio = d.getElementsByName('direccion');
+    let inputNombre = d.getElementsByClassName('inputDatos')[0];
+    let inputDireccion = d.getElementsByClassName('inputDatos')[1];
+    let inputTelefono = d.getElementsByClassName('inputDatos')[2];
+    let inputTarjeta = d.getElementsByClassName('inputDatos')[3];
+    let inputCVV = d.getElementsByClassName('inputDatos')[4];
+
+    if(inputNombre.value == ''){
+        notificacion('Falta nombre y apellido', 'Rojo');
+    }else if(inputDireccion.value == ''){
+        notificacion('Falta el domicilio', 'Rojo');
+    }else if(inputTelefono.value == '' || inputTelefono.value.length < 8 || inputTelefono.value.length > 10){
+        notificacion('El número de teléfono es incorrecto', 'Rojo');
+    }else if(inputTarjeta.value == '' || inputTarjeta.value.length < 16 || inputTarjeta.value.length > 16){
+        notificacion('El número de la tarjeta es incorrecto', 'Rojo');
+    }else if(inputCVV.value == '' || inputCVV.value.length < 3 || inputCVV.value.length > 3){
+        notificacion('El código de seguridad es incorrecto', 'Rojo');
+    }else{
+        notificacion('Compra realizada con exito', 'Verde');
+    }
+
+}
+
+/* <!----- Banners -----!> */
+
+function displayBanners() {
+    let random = (0 + Math.floor((2 - 0) * Math.random())), div;
+
+    div = d.createElement('div');
+    div.setAttribute('class', 'banner');
+
+    if(random == 0){
+
+        div.style.backgroundImage = 'url('+aBanners[0].img+')';
+        div.setAttribute('data-id', 1)
+        div.addEventListener('click', compraDirecta);
+
+    }else if(random == 1){
+
+        div.style.backgroundImage = 'url('+ aBanners[1].img+')';
+        div.setAttribute('data-id', 13)
+        div.addEventListener('click', displayModalProducto);
+
+    }
+
+    d.getElementById('listadoProductos').appendChild(div);
+
+    setTimeout(() => {
+        d.getElementById('listadoProductos').removeChild(d.getElementsByClassName('banner')[0]);
+    }, 10000);
+}
+
+/* <!----- Ajustes -----!> */
+
+
+window.addEventListener('resize', ajustarCarrito);
+window.addEventListener('load', ajustarCarrito);
+
+window.addEventListener('resize', ajustarProdModal);
+window.addEventListener('load', ajustarProdModal);
+
+
+function ajustarCarrito() {
+    
+    let carrito = d.getElementById('carritoModal');
+
+    if(carrito){
+        carrito.style.right=header.offsetLeft + 'px';
+    }
+}
+
+function ajustarProdModal() {
+    
+    let modal = d.getElementsByClassName('modalProducto')[0];
+
+    if(modal){
+        modal.style.left=header.offsetLeft + 'px';
+    }
+}
+
+
+
+displayProductos('Todos');

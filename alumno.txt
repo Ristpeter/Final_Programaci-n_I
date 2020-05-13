@@ -1,0 +1,11 @@
+Nombre: Pedro Danderfer
+
+Cuatrimestre: 3ro
+
+Comisión: A
+
+Turno: Mañana
+
+Materia: Programación I
+
+Profesor: Federico Noto
